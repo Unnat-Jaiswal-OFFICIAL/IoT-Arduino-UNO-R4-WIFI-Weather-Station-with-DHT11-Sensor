@@ -1,0 +1,117 @@
+:Author: unnat_jaiswal_official
+:Email: unnatprivate@gmail
+:Date: 16/05/2026
+:Revision: versionV1.3
+:License: Public Domain
+
+= Project: IoT Temperature and Humidity sensing to dashboard (either on arduino cloud browser                                                               or arduino Iot mobile app)
+
+FUNCTION OF THIS PROJECT:
+
+  This Project enables you to read the Temperature and Humidity of the place where this circuit is Installed Wirelessly
+  Through your Arduino Cloud website on a browser OR your Arduino IoT App OR Serial Monitor through the Board's USB as Long as:
+  
+                -The Board(Your Arduino UNO R4 WIFI ) is connected to a network or internet i.e. Your home network or Hotspot.
+                -Your Phone or Browser is connected to a network or internet. 
+
+== Step 1: Installation and Setup
+
+First,
+       Create a device (use Arduino UNO R4 WIFI) , then create a thing linking the device and and the sketches in these files
+       
+now,
+    make sure your UNO R4 WIFI is connected to your network and make the following variables in the thing's variable tab: 
+
+                         Variable Name  |   Setting    |    Variable Type
+                         - Humidity     | (Read Only), | (Floating Point Number)
+                         - Temperature  | (Read only), | (Floating Point Number)
+                         - SYSsensorSTAT| (Read only), | (Character String)
+    BETA ONLY (OPTIONAL) - isOnline     | (Read only), | (Boolean) 
+
+Finally, 
+       Create a Dashboard and add widgets linking the variables to them for you to read.
+
+== Step 2: Assemble the circuit
+
+-BUZZER: Connect it's VCC to D11 of the board
+         Connect it's GND to GND of the board 
+         
+-DHT11 sensor: Connect it's VCC to 5V of the board
+               Connect it's GND to GND of the board
+               Connect it's DAT(or OUT) to D8 of the board
+
+NOTE: YOU WILL CONNECT THE BOARD USING A USB CABLE TO YOUR WORKSTATION FOR UPLOADING THE CODE .
+      YOU MAY POWER YOUR BOARD BY A WALL OUTLET, BATTERY OR CHARGING OUTLET FOR IT TO WORK 24/7 (Just remember to keep your                                                                                                     home's network or hotspot                                                                                                      ON to work )
+
+== Step 3: Load the code
+
+Upload the code contained in this sketch on to your board 
+
+Then, you may run this code and use the dashboard to view the values being displayed.
+
+=== Folder structure:
+
+....
+IoT_Temperature_and_Humidity_sensorV1.3       => Arduino sketch folder (Typicaly)
+  âââ IoT_Temp_and_Humidity_sensor_V1.3.ino   => Main Arduino file
+  âââ thingProperties.h                       => Default file for any Arduino Cloud Project with a Thing 
+  âââ ReadMe.adoc                             => this file you are currently reading
+....
+
+=== License
+This project is developed as a hobbyist so the standart Arduino Licence for non-comercial projects is used
+
+=== Author
+This project was developed by Unnat Jaiswal using the standart Arduino Cloud Features of the FREE plan
+
+=== BOM
+Components Required for this project:
+
+|===
+|     Type of Component     | Component Name                | Quantity
+| Sensor                    | DHT11 Sensor                  | 1      
+| Actuator (as Sound)       | Piezo Buzzer                  | 1 
+| Conductor                 | Jumper Wire (Male To Female)  | 3 to 5
+| Microcontroller System    | Arduino UNO R4 WIFI           | 1  
+|                              âââ ABX00087          
+|===
+
+==========Sketch Feature Log:
+
+From V1 (original):
+
+
+ â DHT11 read (temp + humidity) every 2s via millis()
+ â Arduino IoT Cloud sync (Temp, Humidity, isOnline)
+ â Buzzer non-blocking beep when offline
+
+Added in V1.1:
+
+
+ â LED Matrix scrolling display
+ â "NO NET" on matrix when offline
+ â "SENSOR ERR" on matrix when DHT11 fails
+ â Temp (Â°C) â Humidity (%) swap every 3s
+
+Added in V1.2:
+
+
+ â SYSsensorSTAT cloud String variable
+ â "SENSOR OPERATIONAL , Readings are being Transmitted" on success
+ â "-!!!---------DHT11 FAILED TO RECIEVE READINGS ON CURRENT ENVIRONMENT---------!!!-" on failure
+
+(Current) in V1.3:
+
+
+ â Buzzer properly silenced on reconnect (was missing the if (buzzerState) guard)
+ â SYSsensorSTAT only writes on state change â no redundant cloud pushes
+ â isOnline only writes on state change
+ â Temp / Humidity only push if value actually changed
+ â Display priority order enforced: No Internet â Sensor Error â Normal
+ â All timing fully non-blocking (millis() throughout, zero delay() in loop)
+
+
+=== Help
+This document is written in the _AsciiDoc_ format, a markup language to describe documents. 
+If you need help you can search the http://www.methods.co.nz/asciidoc[AsciiDoc homepage]
+or consult the http://powerman.name/doc/asciidoc[AsciiDoc cheatsheet]

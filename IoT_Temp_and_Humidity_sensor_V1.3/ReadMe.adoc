@@ -2,7 +2,7 @@
 :Email: unnatprivate@gmail
 :Date: 16/05/2026
 :Revision: versionV1.3
-:License: Public Domain
+:License: Copyright © 2026 [Unnat Jaiswal]. All rights reserved. No part of this project may be copied, reproduced, or distributed without explicit permission.
 
 = Project: IoT Temperature and Humidity sensing to dashboard (either on arduino cloud browser                                                               or arduino Iot mobile app)
 
@@ -59,7 +59,7 @@ IoT_Temperature_and_Humidity_sensorV1.3       => Arduino sketch folder (Typicaly
 ....
 
 === License
-This project is developed as a hobbyist so the standart Arduino Licence for non-comercial projects is used
+Copyright © 2026 [Unnat Jaiswal]. All rights reserved. No part of this project may be copied, reproduced, or distributed without explicit permission.
 
 === Author
 This project was developed by Unnat Jaiswal using the standart Arduino Cloud Features of the FREE plan
